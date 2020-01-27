@@ -253,8 +253,8 @@ class Device:
 
         # TODO: Device needs to be created if it's not yet known to bluetoothd, see "test-device" in bluez-5.43/test/
         self._device_path = '/org/bluez/%s/dev_%s' % (manager.adapter_name, mac_address.replace(':', '_').upper())
-        device_object = self._bus.get_object('org.bluez', self._device_path)
-        self._object = dbus.Interface(device_object, 'org.bluez.Device1')
+        self.device_object = self._bus.get_object('org.bluez', self._device_path)
+        self._object = dbus.Interface(self.device_object, 'org.bluez.Device1')
         self._properties = dbus.Interface(self._object, 'org.freedesktop.DBus.Properties')
         self._properties_signal = None
         self._connect_retry_attempt = None
